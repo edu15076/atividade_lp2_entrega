@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoEntregas.entidades;
 
+import br.cefetmg.gestaoEntregas.entidades.converters.TipoPerfilConverter;
 import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
 import jakarta.persistence.*;
 
@@ -14,6 +15,7 @@ public abstract class Perfil {
 
     @Enumerated(EnumType.STRING)
     @Column(insertable = false, updatable = false)
+    @Convert(converter = TipoPerfilConverter.class)
     private TipoPerfil tipoPerfil;
 
     @ManyToOne(fetch = FetchType.EAGER)

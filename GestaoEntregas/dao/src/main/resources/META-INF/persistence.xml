@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
     <persistence-unit name="persistence" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>br.cefetmg.gestaoEntregas.entidades.Administrador</class>
         <class>br.cefetmg.gestaoEntregas.entidades.Atendente</class>
         <class>br.cefetmg.gestaoEntregas.entidades.Cliente</class>
@@ -11,19 +15,21 @@
         <class>br.cefetmg.gestaoEntregas.entidades.ItemPedido</class>
         <class>br.cefetmg.gestaoEntregas.entidades.Pedido</class>
         <class>br.cefetmg.gestaoEntregas.entidades.Perfil</class>
+        <class>br.cefetmg.gestaoEntregas.entidades.converters.TipoPerfilConverter</class>
+        <class>br.cefetmg.gestaoEntregas.entidades.converters.StatusConverter</class>
         <class>br.cefetmg.gestaoEntregas.entidades.Produto</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/gestaoEntregas"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.password" value="123456"/>
+            <property name="jakarta.persistence.jdbc.password" value="postgres"/>
 
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
             <property name="jakarta.persistence.schema-generation.scripts.action" value="create"/>
             <property name="jakarta.persistence.schema-generation.create-source" value="metadata"/>
             <property name="jakarta.persistence.schema-generation.scripts.create-target" value="createScript.sql"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>

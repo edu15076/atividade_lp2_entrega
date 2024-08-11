@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoEntregas.entidades;
 
+import br.cefetmg.gestaoEntregas.entidades.converters.StatusConverter;
 import br.cefetmg.gestaoEntregas.entidades.enums.Status;
 import jakarta.persistence.*;
 
@@ -15,14 +16,26 @@ public class Pedido {
 
     private Date data;
     private Double valorTotal;
+
+    @Enumerated(EnumType.STRING)
+    @Convert(converter = StatusConverter.class)
     private Status status;
+    private String observacoes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEntregador")
+    private Entregador entregador;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<ItemPedido> itensPedido;
+
+    public Pedido() {
+        valorTotal = (double) 0;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -69,6 +82,26 @@ public class Pedido {
     }
 
     public void setItensPedido(List<ItemPedido> itensPedido) {
+        for (ItemPedido item : itensPedido) {
+            valorTotal += item.getValorTotal();
+        }
+
         this.itensPedido = itensPedido;
+    }
+
+    public Entregador getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(Entregador entregador) {
+        this.entregador = entregador;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 }

@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoEntregas.entidades;
 
+import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,11 +12,15 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
     private String localizacao;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "produto")
     private List<ItemPedido> itemPedido;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Empresa empresa;
 
     public void setId(Long id) {
         this.id = id;
@@ -29,7 +34,9 @@ public class Produto {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) throws AtributoInvalidoException {
+        if(nome.isEmpty())
+            throw new AtributoInvalidoException("Nome invalido.");
         this.nome = nome;
     }
 
@@ -43,6 +50,14 @@ public class Produto {
 
     public List<ItemPedido> getItemPedido() {
         return itemPedido;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public void setItemPedido(List<ItemPedido> itemPedido) {

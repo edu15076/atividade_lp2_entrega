@@ -12,7 +12,7 @@ public class ItemPedido {
     private Double valorUnitario;
     private Integer quantidade;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "idPedido")
     private Pedido pedido;
 
@@ -58,5 +58,9 @@ public class ItemPedido {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Double getValorTotal() {
+        return quantidade * valorUnitario;
     }
 }

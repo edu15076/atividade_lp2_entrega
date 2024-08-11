@@ -1,0 +1,71 @@
+package br.cefetmg.gestaoEntregas.controllers;
+
+import br.cefetmg.gestaoEntregas.dao.ItemPedidoDAO;
+import br.cefetmg.gestaoEntregas.dao.PedidoDAO;
+import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
+import br.cefetmg.gestaoEntregas.entidades.*;
+import br.cefetmg.gestaoEntregas.entidades.enums.Status;
+import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
+import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+
+public class PedidoController {
+    private final PedidoDAO pedidoDAO;
+    private final ItemPedidoDAO itemPedidoDAO;
+
+    public PedidoController() throws DAOException {
+        pedidoDAO = new PedidoDAO();
+        itemPedidoDAO = new ItemPedidoDAO();
+    }
+
+    public Pedido abrirPedido(Cliente cliente) {
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente);
+
+        Date dataAtual = Date.valueOf(LocalDate.now());
+        pedido.setData(dataAtual);
+
+        return pedido;
+    }
+
+    public void criarItemPedido(Pedido pedido, Produto produto, int quantidade, double valorUnitario) {
+        ItemPedido item = new ItemPedido();
+        item.setPedido(pedido);
+        item.setProduto(produto);
+        item.setQuantidade(quantidade);
+        item.setValorUnitario(valorUnitario);
+
+        List<ItemPedido> listaItens = pedido.getItensPedido();
+        listaItens.add(item);
+        pedido.setItensPedido(listaItens);
+    }
+
+    public void removerItemPedido(Pedido pedido, ItemPedido itemPedido) throws DAOException {
+        if(pedido.getId() != null) {
+            itemPedidoDAO.deletar(itemPedido);
+            pedidoDAO.refrescar(pedido);
+        } else {
+            List<ItemPedido> listaItens = pedido.getItensPedido();
+            listaItens.remove(itemPedido);
+            pedido.setItensPedido(listaItens);
+        }
+    }
+
+    public void fecharPedido(Pedido pedido) throws AtributoInvalidoException, DAOException {
+        if (pedido.getItensPedido().isEmpty())
+            throw new AtributoInvalidoException("É necessário que pedido tenha ao menos um item.");
+
+        pedido.setStatus(Status.EM_PREPARACAO);
+
+        pedidoDAO.salvar(pedido);
+    }
+
+    public void atualizarPedidoEntregue(Pedido pedido, Status status, Entregador entregador) throws DAOException {
+        pedido.setStatus(status);
+        pedido.setEntregador(entregador);
+        pedidoDAO.atualizar(pedido);
+    }
+}

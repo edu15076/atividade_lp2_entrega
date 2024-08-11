@@ -14,4 +14,13 @@ public enum TipoPerfil {
     public String getDescricao() {
         return descricao;
     }
+
+    @Override
+    public String toString() {
+        return getDescricao().toUpperCase();
+    }
+
+    public static TipoPerfil valueOfDescricao(String descricao) {
+        return valueOf(descricao.toUpperCase());
+    }
 }

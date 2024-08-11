@@ -1,5 +1,6 @@
 package br.cefetmg.gestaoEntregas.entidades;
 
+import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,19 +12,39 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private String logradouro;
+    @Column(nullable = false)
     private String bairro;
+    @Column(nullable = false)
     private String telefone;
     private String cnpj;
     private String cpf;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idEmpresa")
+    @JoinColumn(name = "idEmpresa", nullable = false)
     private Empresa empresa;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Pedido> pedidos;
+
+    public Cliente(String nome, String logradouro, String bairro, String telefone, String cnpj, String cpf, Empresa empresa) throws AtributoInvalidoException {
+        if(nome.length() < 2 || !nome.matches("[a-zA-Z\\s]+"))
+            throw new AtributoInvalidoException("Nome invalido, ele deve ser maior que 2 caracteres e só deve contar letras e espaços.");
+        this.nome = nome;
+
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.telefone = telefone;
+        this.cnpj = cnpj;
+        this.cpf = cpf;
+        this.empresa = empresa;
+    }
+
+    public Cliente() {
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -37,7 +58,9 @@ public class Cliente {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) throws AtributoInvalidoException {
+        if(nome.length() < 2 || !nome.matches("[a-zA-Z\\s]+"))
+            throw new AtributoInvalidoException("Nome invalido, ele deve ser maior que 2 caracteres e só deve contar letras e espaços.");
         this.nome = nome;
     }
 

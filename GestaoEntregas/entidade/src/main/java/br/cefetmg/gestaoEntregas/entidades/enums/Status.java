@@ -1,7 +1,7 @@
 package br.cefetmg.gestaoEntregas.entidades.enums;
 
 public enum Status {
-    Em_PREPARACAO("Em preparação"),
+    EM_PREPARACAO("Em preparação"),
     SAIU_PARA_ENTREGA("Saiu para entrega"),
     ENTREGUE("Entregue");
 
@@ -13,5 +13,9 @@ public enum Status {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public static Status valueOfDescricao(String descricao) {
+        return valueOf(descricao.toUpperCase());
     }
 }
