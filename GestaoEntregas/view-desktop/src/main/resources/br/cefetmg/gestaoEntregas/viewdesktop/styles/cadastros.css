@@ -1,0 +1,79 @@
+/* styles.css */
+
+#root {
+    -fx-background-color: #f0f0f0;
+    -fx-pref-height: 600px;
+    -fx-pref-width: 1000px;
+}
+
+#rootLarger {
+    -fx-pref-height: 700px;
+    -fx-pref-width: 1200px;
+}
+
+#cadastroPane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-width: 1;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+}
+
+#tituloLabel {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+#cadastroVBox {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+.formLabel {
+    -fx-font-size: 14;
+    -fx-text-fill: #666666;
+}
+
+.textField {
+    -fx-prompt-text-fill: #999999;
+    -fx-background-color: #ffffff;
+    -fx-border-width: 1;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.cadastroButton {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14;
+    -fx-padding: 10;
+    -fx-border-width: 0;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+#cadastrarButton:hover {
+    -fx-background-color: #3e8e41;
+}
+
+#tabelaPane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-width: 1;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+}
+
+#tabelaTableView {
+    -fx-table-cell-width: USE_COMPUTED_SIZE;
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: #cccccc;
+    -fx-table-header-border-color: #333333;
+}
+
+.column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #333333;
+}

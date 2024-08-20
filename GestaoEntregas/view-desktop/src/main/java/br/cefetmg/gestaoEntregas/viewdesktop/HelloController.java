@@ -1,4 +1,4 @@
-package br.cefetmg.gestaoentregas.view;
+package br.cefetmg.gestaoEntregas.viewdesktop;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

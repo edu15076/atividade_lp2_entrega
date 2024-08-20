@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="540" prefWidth="900" stylesheets="@styles/cadastros.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.FuncionariosController">
+  <children>
+    <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="462.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.3608126013423224" layoutY="26.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.396207967657716">
+      <items>
+        <AnchorPane id="cadastroPane" minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="285.0">
+          <children>
+            <Label id="tituloLabel" layoutX="7.0" layoutY="5.0" prefHeight="25.0" prefWidth="243.0" text="Cadastrar Produto" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <padding>
+                <Insets left="10.0" />
+              </padding>
+            </Label>
+            <VBox id="cadastroVBox" layoutY="25.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <children>
+                <Label id="nomeLabel" styleClass="formLabel" text="Nome:" />
+                <TextField id="nomeTextField" fx:id="nomeTextField" />
+                <Label id="localizacaoLabel" layoutX="10.0" layoutY="10.0" styleClass="formLabel" text="Localização" />
+                <TextField id="localizacaoTextField" fx:id="localizacaoTextField" layoutX="10.0" layoutY="28.0" />
+                <Button id="cadastrarButton" fx:id="cadastrarButton" mnemonicParsing="false" styleClass="cadastroButton" text="Cadastrar">
+                  <VBox.margin>
+                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+            </VBox>
+          </children></AnchorPane>
+        <AnchorPane id="tabelaPane" minHeight="0.0" minWidth="0.0" prefHeight="409.0" prefWidth="434.0">
+          <children>
+            <TableView id="tabelaTableView" fx:id="tabelaTableView" prefHeight="200.0" prefWidth="387.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0">
+              <columns>
+                <TableColumn id="nomeColumn" prefWidth="235.47166180610657" text="Nome" />
+                <TableColumn id="localizacaoColumn" prefWidth="254.49060759878853" text="Localização" />
+              </columns>
+            </TableView>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>

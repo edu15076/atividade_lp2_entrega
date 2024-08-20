@@ -9,9 +9,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>entidade</module>
         <module>dao</module>
         <module>controller</module>
-        <module>entidade</module>
+        <module>view-desktop</module>
     </modules>
 
     <properties>

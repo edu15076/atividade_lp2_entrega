@@ -9,7 +9,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>br.cefetmg.gestaoEntregas.controllers</groupId>
     <artifactId>controller</artifactId>
 
     <properties>
@@ -31,4 +30,21 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>--add-exports</arg>
+                        <arg>java.base/jdk.internal.ref=br.cefetmg.gestaoEntregas.controllers</arg>
+                        <arg>--add-exports</arg>
+                        <arg>unnamed/org.apache.commons.codec.digest=br.cefetmg.gestaoEntregas.controllers</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
