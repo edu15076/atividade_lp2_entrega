@@ -1,5 +1,0 @@
-login /br/cefetmg/gestaoEntregas/viewdesktop/login-scene.fxml
-produtos /br/cefetmg/gestaoEntregas/viewdesktop/produtos-scene.fxml
-funcionarios /br/cefetmg/gestaoEntregas/viewdesktop/funcionarios-scene.fxml
-clientes /br/cefetmg/gestaoEntregas/viewdesktop/clientes-scene.fxml
-

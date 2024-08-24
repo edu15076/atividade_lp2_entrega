@@ -7,7 +7,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         SceneManager sceneManager = new SceneManager();
-        sceneManager.showScene(stage, "clientes", "Desenvolvimento");
+        sceneManager.showScene(stage, "login-scene.fxml", "Desenvolvimento");
     }
 
     public static void main(String[] args) {

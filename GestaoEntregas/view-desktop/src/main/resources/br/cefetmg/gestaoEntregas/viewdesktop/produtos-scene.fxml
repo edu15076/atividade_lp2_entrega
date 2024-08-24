@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.geometry.Insets?>
-<AnchorPane prefHeight="540" prefWidth="900" stylesheets="@styles/cadastros.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.FuncionariosController">
+<AnchorPane prefHeight="585.0" prefWidth="900" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.ProdutosController">
   <children>
-    <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="462.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <SplitPane dividerPositions="0.3608126013423224" layoutY="26.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.396207967657716">
+    <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuButton mnemonicParsing="false" text="Menu">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Funcionários" />
+          <MenuItem mnemonicParsing="false" text="Pedidos" />
+          <MenuItem mnemonicParsing="false" text="Clientes" />
+          <MenuItem mnemonicParsing="false" text="Perfil" />
+        </items>
+      </MenuButton>
+      <Button fx:id="sairButton" mnemonicParsing="false" onAction="#onHandleSairButton" styleClass="menuButton" text="Sair" />
+    </ToolBar>
+    <SplitPane dividerPositions="0.3608126013423224" layoutY="39.84905803784993" prefHeight="545.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
       <items>
         <AnchorPane id="cadastroPane" minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="285.0">
           <children>
@@ -60,7 +52,7 @@
               </padding>
             </VBox>
           </children></AnchorPane>
-        <AnchorPane id="tabelaPane" minHeight="0.0" minWidth="0.0" prefHeight="409.0" prefWidth="434.0">
+        <AnchorPane id="tabelaPane" minHeight="0.0" minWidth="0.0" prefHeight="490.0" prefWidth="572.0">
           <children>
             <TableView id="tabelaTableView" fx:id="tabelaTableView" prefHeight="200.0" prefWidth="387.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0">
               <columns>

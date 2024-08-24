@@ -4,28 +4,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="root" stylesheets="@styles/cadastros.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.ProdutosController">
+<AnchorPane id="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.ProdutosController">
   <children>
-    <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="462.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <SplitPane dividerPositions="0.3608126013423224" layoutY="26.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.396207967657716">
+    <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuButton mnemonicParsing="false" text="Menu">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Funcionários" />
+          <MenuItem mnemonicParsing="false" text="Pedidos" />
+          <MenuItem mnemonicParsing="false" text="Clientes" />
+          <MenuItem mnemonicParsing="false" text="Perfil" />
+        </items>
+      </MenuButton>
+      <Button fx:id="sairButton" mnemonicParsing="false"  styleClass="menuButton" text="Sair" />
+    </ToolBar>
+    <SplitPane dividerPositions="0.3608126013423224" layoutY="26.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40">
       <items>
         <AnchorPane id="cadastroPane" minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="285.0">
           <children>
@@ -39,7 +31,7 @@
                 <Label id="nomeLabel" styleClass="formLabel" text="Nome:" />
                 <TextField id="nomeTextField" fx:id="nomeTextField" />
                 <Label id="senhaLabel" layoutX="10.0" layoutY="10.0" styleClass="formLabel" text="Senha:" />
-                <TextField id="senhaTextField" fx:id="senhaTextField" layoutX="10.0" layoutY="28.0" styleClass="textField" />
+                <PasswordField id="senhaTextField" fx:id="senhaPasswordField" layoutX="10.0" layoutY="28.0" styleClass="textField" />
                 <Label id="telefoneLabel" layoutX="20.0" layoutY="92.0" styleClass="formLabel" text="Telefone:" />
                 <TextField id="telefoneTextField" fx:id="telefoneTextField" layoutX="20.0" layoutY="122.0" styleClass="textField" />
                 <Label id="perfilLabel" layoutX="20.0" layoutY="163.0" styleClass="formLabel" text="Perfil:" />

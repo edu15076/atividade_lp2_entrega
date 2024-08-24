@@ -31,9 +31,9 @@ public class ClientesController {
     @FXML
     public void teste(ActionEvent event) {
         SceneManager sceneManager = new SceneManager();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = sceneManager.getStage(event);
         try {
-            sceneManager.showScene(stage, "funcionarios", "Desenvolvimento");
+            sceneManager.showScene(stage, "funcionarios-scene.fxml", "Desenvolvimento");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

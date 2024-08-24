@@ -6,6 +6,12 @@
     -fx-pref-width: 1000px;
 }
 
+#rootShort {
+    -fx-background-color: #f0f0f0;
+    -fx-pref-height: 400px;
+    -fx-pref-width: 650px;
+}
+
 #rootLarger {
     -fx-pref-height: 700px;
     -fx-pref-width: 1200px;
@@ -44,7 +50,14 @@
     -fx-padding: 5;
 }
 
-.cadastroButton {
+#removerButton {
+    -fx-background-color: #e53f3f;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+    -fx-border-radius: 5;
+}
+
+.cadastroButton, .loginButton {
     -fx-background-color: #4CAF50;
     -fx-text-fill: #ffffff;
     -fx-font-size: 14;
@@ -76,4 +89,51 @@
 .column {
     -fx-alignment: CENTER;
     -fx-text-fill: #333333;
+}
+
+.menu-bar, .tool-bar {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14;
+    -fx-padding: .5em 1.5em;
+    -fx-border-width: 0;
+    -fx-font: bold 11pt "Segoe UI";
+}
+
+.tool-bar .menu .label {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 0;
+}
+
+.context-menu {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 1 1 1 1; /* 4 1 8 1 */
+}
+
+.tool-bar .menu-item, .tool-bar .menu-item .label {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 3 8;
+    -fx-cursor: hand;
+}
+
+.tool-bar .menu-button, .tool-bar .menu-button .label, .tool-bar .menuButton {
+    /*-fx-mark-color: #2e7331;*/
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 0 10;
+    -fx-cursor: hand;
+}
+
+.menu-button .arrow {
+    -fx-background-color: #ffffff;
+}
+
+
+.tool-bar .menu-item:hover, .tool-bar .menu-item:hover .label, .tool-bar .menuButton:hover {
+    -fx-background-color: #2e7331;
 }

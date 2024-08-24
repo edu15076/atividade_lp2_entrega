@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.LoginController">
 <!--   <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">-->
-    <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+    <VBox id="loginScene" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
       <children>
           <GridPane fx:id="gridPane" alignment="CENTER" hgap="10" vgap="10">
-              <Label text="CPF ou CNPJ da loja:" />
-              <TextField fx:id="lojaNumber" GridPane.columnIndex="1" />
-              <Label text="Telefone:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-              <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-              <Label text="Senha:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-              <TextField fx:id="password" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              <Label styleClass="formLabel" text="CPF ou CNPJ da loja:" />
+              <TextField fx:id="lojaNumber" styleClass="textField" GridPane.columnIndex="1" />
+              <Label styleClass="formLabel" text="Telefone:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+              <TextField fx:id="phoneNumber" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              <Label styleClass="formLabel" text="Senha:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+              <PasswordField fx:id="senhaPasswordField" prefHeight="31.0" prefWidth="266.0" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -31,7 +25,7 @@
                <RowConstraints />
             </rowConstraints>
           </GridPane>
-            <Button text="Logar">
+            <Button prefHeight="41.0" prefWidth="105.0" styleClass="loginButton" text="Logar" onAction="#handleLoginAction">
             <VBox.margin>
                <Insets top="10.0" />
             </VBox.margin></Button>
