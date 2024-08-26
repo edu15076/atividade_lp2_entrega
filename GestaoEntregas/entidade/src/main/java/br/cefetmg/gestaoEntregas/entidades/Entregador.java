@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table
 public class Entregador extends Perfil {
     public Entregador() {
         this.setTipoPerfil(TipoPerfil.ENTREGADOR);

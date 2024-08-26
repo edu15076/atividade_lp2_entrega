@@ -22,7 +22,7 @@ public class Funcionario {
     @Column(nullable = false)
     private String senha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEmpresa", nullable = false)
     private Empresa empresa;
 

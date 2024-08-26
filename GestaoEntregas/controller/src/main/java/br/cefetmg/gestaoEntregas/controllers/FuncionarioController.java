@@ -39,7 +39,7 @@ public class FuncionarioController {
     }
 
     public Funcionario consultarTelefone(String telefone) throws DAOException {
-        List<Funcionario> funcionarios = dao.consultarCampo(new Pair<String, String>("telefone", telefone));
+        List<Funcionario> funcionarios = dao.consultarCampo(new Pair<>("telefone", telefone));
 
         return funcionarios.isEmpty() ? null : funcionarios.get(0);
     }

@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
 public class Administrador extends Perfil {
     public Administrador() {
         this.setTipoPerfil(TipoPerfil.ADMINISTRADOR);

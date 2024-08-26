@@ -13,7 +13,6 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
 public abstract class BaseDAO<T> {
-
     protected final EntityManagerFactory entityManagerFactory;
     protected final String nomeEntidade;
     protected final String nomeTabela;
