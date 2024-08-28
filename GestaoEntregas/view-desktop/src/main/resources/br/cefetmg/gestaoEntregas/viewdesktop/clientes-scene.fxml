@@ -13,27 +13,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ToolBar?>
 <AnchorPane id="rootLarger" prefHeight="706.0" prefWidth="1102.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.ClientesController">
   <children>
-    <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="462.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
+    <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuButton mnemonicParsing="false" text="Menu">
+        <items>
+          <MenuItem fx:id="funcionariosMenuItem" mnemonicParsing="false" text="Funcionários" />
+          <MenuItem fx:id="pedidosMenuItem" mnemonicParsing="false" text="Pedidos" />
+          <MenuItem fx:id="clientesMenuItem" mnemonicParsing="false" text="Clientes" />
+          <MenuItem fx:id="perfilMenuItem" mnemonicParsing="false" text="Perfil" />
+        </items>
+      </MenuButton>
+      <Button fx:id="sairButton" mnemonicParsing="false" styleClass="menuButton" text="Sair" onAction="#onHandleSairButton" />
+    </ToolBar>
     <SplitPane dividerPositions="0.28017266446936484" layoutY="26.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.396207967657716">
       <items>
         <AnchorPane id="cadastroPane" minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="285.0">
@@ -54,7 +48,7 @@
                 <Label id="enderecoLabel" layoutX="20.0" layoutY="163.0" text="Endereço:" />
                         <TextField promptText="Bairro" styleClass="textField" />
                         <TextField layoutX="20.0" layoutY="284.0" promptText="Logradouro" styleClass="textField" />
-                <Button id="cadastrarButton" fx:id="cadastrarButton" mnemonicParsing="false" onAction="#teste" styleClass="cadastroButton" text="Cadastrar">
+                <Button id="cadastrarButton" fx:id="cadastrarButton" mnemonicParsing="false" onAction="#handleCadastro" styleClass="cadastroButton" text="Cadastrar">
                   <VBox.margin>
                     <Insets bottom="10.0" right="10.0" top="10.0" />
                   </VBox.margin>

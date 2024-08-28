@@ -92,5 +92,5 @@ INSERT INTO Funcionario (idEmpresa, nome, senha, telefone) VALUES
 
 -- Inserindo Perfis para os Funcionários
 INSERT INTO Perfil (idFuncionario, tipoPerfil) VALUES
-(1, 'Administrador'),
-(2, 'Administrador');
+(1, 'ADMINISTRADOR'),
+(2, 'ADMINISTRADOR');

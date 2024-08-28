@@ -6,6 +6,7 @@ import br.cefetmg.gestaoEntregas.dao.EmpresaDAO;
 import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
 import br.cefetmg.gestaoEntregas.entidades.Empresa;
 import br.cefetmg.gestaoEntregas.entidades.Funcionario;
+import br.cefetmg.gestaoEntregas.viewdesktop.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -68,7 +69,7 @@ public class LoginController {
             System.out.println("Erro de login: " + e.getMessage());
         }
 
-        Navigator navigator = Navigator.getInstance((Stage) ((Node) event.getSource()).getScene().getWindow());
-        navigator.navigate("funcionarios-scene.fxml");
+        SceneManager sceneManager = new SceneManager();
+        sceneManager.showScene(sceneManager.getStage(event), "funcionarios-scene.fxml", "Desenvolvimento");
     }
 }

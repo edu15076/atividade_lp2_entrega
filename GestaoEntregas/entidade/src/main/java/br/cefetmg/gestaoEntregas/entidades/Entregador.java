@@ -1,14 +1,12 @@
 package br.cefetmg.gestaoEntregas.entidades;
 
 import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("ENTREGADOR")
 public class Entregador extends Perfil {
     public Entregador() {
         this.setTipoPerfil(TipoPerfil.ENTREGADOR);

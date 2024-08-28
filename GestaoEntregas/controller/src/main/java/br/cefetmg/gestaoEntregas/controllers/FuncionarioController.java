@@ -38,9 +38,17 @@ public class FuncionarioController {
         dao.deletar(funcionario);
     }
 
+    public void atualizar(Funcionario funcionario) throws DAOException {
+        dao.atualizar(funcionario);
+    }
+
     public Funcionario consultarTelefone(String telefone) throws DAOException {
         List<Funcionario> funcionarios = dao.consultarCampo(new Pair<>("telefone", telefone));
 
-        return funcionarios.isEmpty() ? null : funcionarios.get(0);
+        return funcionarios.isEmpty() ? null : funcionarios.getFirst();
+    }
+
+    public List<Funcionario> consultarFuncionarios(Empresa empresa) throws DAOException {
+        return dao.consultarCampo(new Pair<>("empresa", empresa));
     }
 }

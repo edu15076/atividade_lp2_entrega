@@ -1,19 +1,71 @@
 package br.cefetmg.gestaoEntregas.viewdesktop.controllers;
 
 import br.cefetmg.gestaoEntregas.viewdesktop.SceneManager;
+import br.cefetmg.gestaoEntregas.viewdesktop.controllers.interfaces.MenuControllerInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 import br.cefetmg.gestaoEntregas.controllers.LoginController;
+import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-// É uma ideia de como implementar essa questão dos menus
-public class MenuController {
+public class MenuController implements MenuControllerInterface, Initializable {
     @FXML
-    private Button sairButton;
+    private MenuItem funcionariosMenuItem;
+
+    @FXML
+    private MenuItem pedidosMenuItem;
+
+    @FXML
+    private MenuItem clientesMenuItem;
+
+    @FXML
+    private MenuItem perfilMenuItem;
+
+    private SceneManager sceneManager;
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        sceneManager = new SceneManager(); // Initialize the SceneManager instance
+        funcionariosMenuItem.setOnAction(this::handleMenuAction);
+        pedidosMenuItem.setOnAction(this::handleMenuAction);
+        clientesMenuItem.setOnAction(this::handleMenuAction);
+        perfilMenuItem.setOnAction(this::handleMenuAction);
+    }
+
+    public void handleMenuAction(ActionEvent event) {
+        String fxmlFile = "";
+        String title = "";
+        Stage stage = sceneManager.getStageFromMenuItem((MenuItem) event.getSource());
+
+        if (event.getSource() == funcionariosMenuItem) {
+            fxmlFile = "funcionarios-scene.fxml";
+            title = "Funcionários";
+        } else if (event.getSource() == pedidosMenuItem) {
+            fxmlFile = "pedidos-scene.fxml";
+            title = "Pedidos";
+        } else if (event.getSource() == clientesMenuItem) {
+            fxmlFile = "clientes-scene.fxml";
+            title = "Clientes";
+        } else if (event.getSource() == perfilMenuItem) {
+            fxmlFile = "editar-perfil-scene.fxml";
+            title = "Perfil";
+            stage = new Stage();
+        }
+
+        try {
+            sceneManager.showScene(stage, fxmlFile, title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void onHandleSairButton(ActionEvent event) throws IOException {
         LoginController.logout();
