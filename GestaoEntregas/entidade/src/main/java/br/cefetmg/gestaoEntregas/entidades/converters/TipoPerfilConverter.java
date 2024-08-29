@@ -8,14 +8,13 @@ import jakarta.persistence.Converter;
 public class TipoPerfilConverter implements AttributeConverter<TipoPerfil, String> {
     @Override
     public String convertToDatabaseColumn(TipoPerfil attribute) {
-        return attribute.getDescricao();
+        return attribute.toString();
     }
 
     @Override
     public TipoPerfil convertToEntityAttribute(String dbData) {
-        if (dbData == null) {
+        if (dbData == null)
             return null;
-        }
-        return TipoPerfil.valueOfDescricao(dbData);
+        return TipoPerfil.valueOf(dbData);
     }
 }

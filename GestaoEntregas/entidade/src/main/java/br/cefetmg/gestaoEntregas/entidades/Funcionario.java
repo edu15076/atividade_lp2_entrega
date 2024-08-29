@@ -22,11 +22,11 @@ public class Funcionario {
     @Column(nullable = false)
     private String senha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEmpresa", nullable = false)
     private Empresa empresa;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "funcionario")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "funcionario")
     private List<Perfil> perfis;
 
     public void setId(Long id) {

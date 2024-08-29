@@ -34,8 +34,8 @@
       <Label alignment="CENTER" layoutX="243.0" layoutY="33.0" text="Editar perfil" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox alignment="CENTER" layoutX="150.0" layoutY="323.0" prefHeight="55.0" prefWidth="264.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
          <children>
-            <Button fx:id="cancelarButton" alignment="CENTER" mnemonicParsing="false" text="Cancelar" />
-            <Button fx:id="salvarButton" mnemonicParsing="false" text="Salvar" />
+            <Button fx:id="cancelarButton" alignment="CENTER" mnemonicParsing="false" text="Cancelar" onAction="#handleCancelar" />
+            <Button fx:id="salvarButton" mnemonicParsing="false" text="Salvar" onAction="#handleSalvar" />
          </children>
       </HBox>
    </children>

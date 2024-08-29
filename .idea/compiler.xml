@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="entidade" />
+        <module name="view-desktop" />
+        <module name="controller" />
+        <module name="dao" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="controller" options="--add-exports java.base/jdk.internal.ref=br.cefetmg.gestaoEntregas.controllers --add-exports unnamed/org.apache.commons.codec.digest=br.cefetmg.gestaoEntregas.controllers" />
+      <module name="dao" options="" />
+    </option>
+  </component>
+</project>

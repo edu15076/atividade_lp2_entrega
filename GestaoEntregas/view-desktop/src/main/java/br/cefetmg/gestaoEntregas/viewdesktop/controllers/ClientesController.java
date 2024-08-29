@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ClientesController {
+public class ClientesController extends MenuController {
 
     @FXML
     private Button cadastrarButton;
@@ -28,14 +28,7 @@ public class ClientesController {
     @FXML
     private TextField telefoneTextField;
 
-    @FXML
-    public void teste(ActionEvent event) {
-        SceneManager sceneManager = new SceneManager();
-        Stage stage = sceneManager.getStage(event);
-        try {
-            sceneManager.showScene(stage, "funcionarios-scene.fxml", "Desenvolvimento");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void handleCadastro(ActionEvent event) {
+
     }
 }

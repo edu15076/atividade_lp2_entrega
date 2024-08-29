@@ -46,4 +46,11 @@ public class EmpresaController {
 
         return empresaList.get(0);
     }
+
+    public Empresa recuperarPorCodigo(String codigo) throws DAOException {
+        Empresa empresa = this.recuperarPorCPF(codigo);
+        if (empresa == null)
+            return this.recuperarPorCNPJ(codigo);
+        return empresa;
+    }
 }
