@@ -7,6 +7,7 @@ import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
 import br.cefetmg.gestaoEntregas.dao.utils.Pair;
 import br.cefetmg.gestaoEntregas.entidades.Cliente;
 import br.cefetmg.gestaoEntregas.entidades.Empresa;
+import br.cefetmg.gestaoEntregas.entidades.Funcionario;
 import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
 import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
 
@@ -36,5 +37,9 @@ public class ClienteController {
         List<Cliente> resultadosConsulta = dao.consultarCampo(new Pair<String, String>("cnpj", cnpj));
 
         return resultadosConsulta.isEmpty() ? null : resultadosConsulta.get(0);
+    }
+
+    public List<Cliente> consultarClientes(Empresa empresa) throws DAOException {
+        return dao.consultarCampo(new Pair<>("empresa", empresa));
     }
 }
