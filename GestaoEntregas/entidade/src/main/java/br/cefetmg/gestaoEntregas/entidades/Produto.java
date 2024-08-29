@@ -16,10 +16,10 @@ public class Produto {
     private String nome;
     private String localizacao;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "produto")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "produto")
     private List<ItemPedido> itemPedido;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Empresa empresa;
 
     public void setId(Long id) {
