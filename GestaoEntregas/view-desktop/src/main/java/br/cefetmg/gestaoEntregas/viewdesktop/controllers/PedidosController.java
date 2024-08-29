@@ -1,4 +1,4 @@
 package br.cefetmg.gestaoEntregas.viewdesktop.controllers;
 
-public class PedidosController {
+public class PedidosController extends MenuController {
 }

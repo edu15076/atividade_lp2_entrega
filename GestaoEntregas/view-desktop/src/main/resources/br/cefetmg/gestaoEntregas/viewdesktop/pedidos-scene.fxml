@@ -16,7 +16,7 @@
 
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.MenuButton?>
-<AnchorPane id="rootLarger" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.ProdutosController">
+<AnchorPane id="rootLarger" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.PedidosController">
   <children>
     <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <MenuButton mnemonicParsing="false" text="Menu">
