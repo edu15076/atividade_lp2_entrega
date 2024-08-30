@@ -29,6 +29,8 @@ public class MenuController implements MenuControllerInterface, Initializable {
     @FXML
     private MenuItem perfilMenuItem;
 
+    // TODO: Adicionar telas de produtos, relatorios e pedidos do entregador
+
     private SceneManager sceneManager;
 
     @FXML

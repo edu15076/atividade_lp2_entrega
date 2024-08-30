@@ -104,6 +104,16 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    public String getCodigo() {
+        if (this.cnpj == null)
+            return this.cpf;
+        return this.cnpj;
+    }
+
+    public String getEndereco() {
+        return this.logradouro + ", " + this.bairro;
+    }
+
     public Empresa getEmpresa() {
         return empresa;
     }

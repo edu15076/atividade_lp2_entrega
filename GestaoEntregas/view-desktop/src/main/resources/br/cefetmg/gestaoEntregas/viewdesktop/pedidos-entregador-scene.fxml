@@ -14,14 +14,14 @@
 <AnchorPane id="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.PedidosEntregadorController">
   <children>
     <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <MenuButton mnemonicParsing="false" text="Menu">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Funcionários" />
-          <MenuItem mnemonicParsing="false" text="Pedidos" />
-          <MenuItem mnemonicParsing="false" text="Clientes" />
-          <MenuItem mnemonicParsing="false" text="Perfil" />
-        </items>
-      </MenuButton>
+        <MenuButton mnemonicParsing="false" text="Menu">
+            <items>
+                <MenuItem fx:id="funcionariosMenuItem" mnemonicParsing="false" text="Funcionários" />
+                <MenuItem fx:id="pedidosMenuItem" mnemonicParsing="false" text="Pedidos" />
+                <MenuItem fx:id="clientesMenuItem" mnemonicParsing="false" text="Clientes" />
+                <MenuItem fx:id="perfilMenuItem" mnemonicParsing="false" text="Perfil" />
+            </items>
+        </MenuButton>
       <Button fx:id="sairButton" mnemonicParsing="false" styleClass="menuButton" text="Sair" />
     </ToolBar>
       <SplitPane dividerPositions="0.24015197349939346" layoutY="41.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
