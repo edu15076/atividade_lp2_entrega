@@ -30,7 +30,7 @@ public class ProdutoController {
     }
 
     public List<Produto> listarProdutosEmpresa(Empresa empresa) throws DAOException {
-        return dao.consultarCampo(new Pair<String, Empresa>("empresa", empresa));
+        return dao.consultarCampo(new Pair<>("empresa", empresa));
     }
 
     public Produto consultarProdutoCodigo(String codigo) throws DAOException {

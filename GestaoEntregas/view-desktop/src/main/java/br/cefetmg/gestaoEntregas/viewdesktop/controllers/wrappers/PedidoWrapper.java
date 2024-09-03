@@ -6,7 +6,7 @@ import br.cefetmg.gestaoEntregas.entidades.enums.Status;
 import java.time.LocalDate;
 
 public class PedidoWrapper {
-    private String cpf;
+    private String codigo;
     private String nomeCliente;
     private Status status;
     private LocalDate data;
@@ -16,16 +16,16 @@ public class PedidoWrapper {
         status = pedido.getStatus();
         data = pedido.getData().toLocalDate();
         preco = pedido.getValorTotal();
-        cpf = pedido.getCliente().getCpf();
+        codigo = pedido.getCliente().getCodigo();
         nomeCliente = pedido.getCliente().getNome();
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNomeCliente() {

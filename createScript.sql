@@ -44,6 +44,7 @@ create table Pedido
     id           bigserial not null,
     idCliente    bigint,
     idEntregador bigint,
+    idEmpresa    bigint,
     observacoes  varchar(255),
     status       varchar(255) check (status in ('EM_PREPARACAO', 'SAIU_PARA_ENTREGA', 'ENTREGUE')),
     primary key (id)
@@ -59,6 +60,7 @@ create table Produto
 (
     empresa_id  bigint,
     id          bigserial    not null,
+    codigo      varchar(255) not null,
     localizacao varchar(255),
     nome        varchar(255) not null,
     primary key (id)
@@ -79,6 +81,8 @@ alter table if exists Perfil
     add constraint FK5ucdwy5ukx2od0sj9ego7h6tj foreign key (idFuncionario) references Funcionario;
 alter table if exists Produto
     add constraint FK6081i713vd7gx1ki0ub2d86hg foreign key (empresa_id) references Empresa;
+alter table if exists Pedido
+    add constraint FK6081i713vd7gx1ki0ub2d86hy foreign key (idEmpresa) references Empresa;
 
 -- Inserindo as Empresas
 INSERT INTO Empresa (cnpj, cpf, nome, porcentagemComissaoEntregador) VALUES

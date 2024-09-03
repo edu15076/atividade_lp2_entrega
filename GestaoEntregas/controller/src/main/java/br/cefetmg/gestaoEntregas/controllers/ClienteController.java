@@ -39,6 +39,13 @@ public class ClienteController {
         return resultadosConsulta.isEmpty() ? null : resultadosConsulta.get(0);
     }
 
+    public Cliente consultarCodigo(String codigo) throws DAOException {
+        Cliente resultadoConsulta = consultarCPF(codigo);
+        if (resultadoConsulta == null)
+            return consultarCNPJ(codigo);
+        return resultadoConsulta;
+    }
+
     public List<Cliente> consultarClientes(Empresa empresa) throws DAOException {
         return dao.consultarCampo(new Pair<>("empresa", empresa));
     }

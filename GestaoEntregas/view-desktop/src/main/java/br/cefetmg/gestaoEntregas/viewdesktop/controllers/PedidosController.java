@@ -33,10 +33,10 @@ public class PedidosController extends MenuController {
     private Button cadastrarButton;
 
     @FXML
-    private TextField cpfClienteTextField;
+    private TextField codigoClienteTextField;
 
     @FXML
-    private TableColumn<PedidoWrapper, String> cpfColumn;
+    private TableColumn<PedidoWrapper, String> codigoColumn;
 
     @FXML
     private TableColumn<PedidoWrapper, LocalDate> dataColumn;
@@ -75,7 +75,7 @@ public class PedidosController extends MenuController {
         adcionarItemButton.setOnAction(this::handleAdcionarProdutoButtonClick);
         cadastrarButton.setOnAction(this::handleCadastrarButtonClick);
 
-        cpfColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
@@ -91,7 +91,7 @@ public class PedidosController extends MenuController {
 
             ObservableList<PedidoWrapper> pedidoList = FXCollections.observableArrayList();
 
-            for (Pedido pedido: pedidos ) {
+            for (Pedido pedido : pedidos) {
                 pedidoList.add(new PedidoWrapper(pedido));
             }
 
@@ -103,12 +103,12 @@ public class PedidosController extends MenuController {
     }
 
     private void handleCadastrarButtonClick(ActionEvent event) {
-        String cpfCliente = cpfClienteTextField.getText();
+        String codigoCliente = codigoClienteTextField.getText();
         String observacoes = observacoesTextArea.getText();
 
         try {
             ClienteController clienteController = new ClienteController();
-            Cliente cliente = clienteController.consultarCPF(cpfCliente);
+            Cliente cliente = clienteController.consultarCodigo(codigoCliente);
 
             assert cliente != null;
 
@@ -126,15 +126,13 @@ public class PedidosController extends MenuController {
 
             loadPedidos();
 
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        } catch (AtributoInvalidoException e) {
+        } catch (DAOException | AtributoInvalidoException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void clearFields() {
-        cpfClienteTextField.setText("");
+        codigoClienteTextField.setText("");
         observacoesTextArea.setText("");
 
         for(ItemPedidoComponentController i : itens)

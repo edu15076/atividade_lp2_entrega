@@ -16,7 +16,7 @@
           <MenuItem fx:id="perfilMenuItem" mnemonicParsing="false" text="Perfil" />
         </items>
       </MenuButton>
-      <Button fx:id="sairButton" mnemonicParsing="false" styleClass="menuButton" text="Sair" />
+      <Button fx:id="sairButton" mnemonicParsing="false" styleClass="menuButton" text="Sair" onAction="#onHandleSairButton" />
     </ToolBar>
     <SplitPane dividerPositions="0.3608126013423224" layoutY="26.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40">
       <items>
@@ -30,8 +30,8 @@
                          <Insets left="10.0" />
                        </padding>
                      </Label>
-                 <Label id="cpfClienteLabel" layoutX="10.0" layoutY="10.0" styleClass="formLabel" text="CPF do cliente:" />
-                 <TextField id="cpfClienteTextField" fx:id="cpfClienteTextField" layoutX="10.0" layoutY="28.0" styleClass="textField" />
+                 <Label id="codigoClienteLabel" layoutX="10.0" layoutY="10.0" styleClass="formLabel" text="Codigo do cliente:" />
+                 <TextField id="codigoClienteTextField" fx:id="codigoClienteTextField" layoutX="10.0" layoutY="28.0" styleClass="textField" />
                  <Label styleClass="formLabel" text="Observações" />
                  <TextArea fx:id="observacoesTextArea" prefHeight="125.0" prefRowCount="5" prefWidth="300.0" styleClass="textField" wrapText="true" />
                </VBox>
@@ -61,7 +61,7 @@
           <children>
             <TableView id="tabelaTableView" fx:id="tabelaTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn id="cpfColumn" fx:id="cpfColumn" minWidth="100.0" prefWidth="144.00009083747864" styleClass="column" text="CPF Cliente" />
+                <TableColumn id="codigoColumn" fx:id="codigoColumn" minWidth="100.0" prefWidth="144.00009083747864" styleClass="column" text="CPF Cliente" />
                 <TableColumn id="nomeColumn" fx:id="nomeColumn" minWidth="100.0" prefWidth="219.169921875" styleClass="column" text="Nome Cliente" />
                 <TableColumn id="statusColumn" fx:id="statusColumn" minWidth="71.547119140625" prefWidth="71.547119140625" styleClass="column" text="Status" />
                 <TableColumn id="dataColumn" fx:id="dataColumn" minWidth="0.0" prefWidth="92.37728881835938" styleClass="column" text="Data" />
