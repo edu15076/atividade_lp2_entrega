@@ -8,10 +8,13 @@
       xmlns:fx="http://javafx.com/fxml/1"
       stylesheets="@style.css"
       fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.ItemPedidoComponentController"
+      fx:id="itemPedido"
       spacing="5">
+  <Label text="Produto:" styleClass="formLabel"/>
+  <TextField fx:id="codigoProdutoField" styleClass="textField"/>
   <Label text="Valor unitário:" styleClass="formLabel"/>
-  <TextField fx:id="valueField" styleClass="textField"/>
+  <TextField fx:id="valorField" styleClass="textField"/>
   <Label text="Quantidade:" styleClass="formLabel"/>
-  <TextField fx:id="quantityField" styleClass="textField"/>
+  <TextField fx:id="quantidadeField" styleClass="textField"/>
   <Button id="removerButton" fx:id="removerButton" mnemonicParsing="false" text="Remover"/>
 </VBox>

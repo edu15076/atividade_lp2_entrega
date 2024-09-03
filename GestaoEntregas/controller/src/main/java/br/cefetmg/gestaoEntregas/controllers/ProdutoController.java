@@ -17,10 +17,11 @@ public class ProdutoController {
         dao = new ProdutoDAO();
     }
 
-    public Produto cradastrar(String nome, String localizacao, Empresa empresa) throws AtributoInvalidoException, DAOException {
+    public Produto cradastrar(String nome, String codigo, String localizacao, Empresa empresa) throws AtributoInvalidoException, DAOException {
         Produto produto = new Produto();
         produto.setNome(nome);
         produto.setLocalizacao(localizacao);
+        produto.setCodigo(codigo);
         produto.setEmpresa(empresa);
 
         dao.salvar(produto);
@@ -30,6 +31,12 @@ public class ProdutoController {
 
     public List<Produto> listarProdutosEmpresa(Empresa empresa) throws DAOException {
         return dao.consultarCampo(new Pair<String, Empresa>("empresa", empresa));
+    }
+
+    public Produto consultarProdutoCodigo(String codigo) throws DAOException {
+        List<Produto> resultadosConsulta = dao.consultarCampo(new Pair<>("codigo", codigo));
+
+        return resultadosConsulta.isEmpty() ? null : resultadosConsulta.get(0);
     }
 
     public void deletar(Produto produto) throws DAOException {

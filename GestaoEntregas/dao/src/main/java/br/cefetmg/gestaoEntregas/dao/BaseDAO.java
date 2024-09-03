@@ -61,7 +61,7 @@ public abstract class BaseDAO<T> {
 
             resultList = query.getResultList();
         } catch (Exception e) {
-            throw new DAOException("Erro ao consultar " + nomeEntidade, e);
+            throw new DAOException("Erro ao consultar " + nomeEntidade + " " + e.getMessage(), e);
         }
 
         return resultList;

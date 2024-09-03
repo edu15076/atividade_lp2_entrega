@@ -22,6 +22,7 @@
         <items>
           <MenuItem fx:id="funcionariosMenuItem" mnemonicParsing="false" text="Funcionários" />
           <MenuItem fx:id="pedidosMenuItem" mnemonicParsing="false" text="Pedidos" />
+          <MenuItem fx:id="produtosMenuItem" mnemonicParsing="false" text="Produtos" />
           <MenuItem fx:id="clientesMenuItem" mnemonicParsing="false" text="Clientes" />
           <MenuItem fx:id="perfilMenuItem" mnemonicParsing="false" text="Perfil" />
         </items>

@@ -33,10 +33,16 @@ public class ProdutosController extends MenuController implements Initializable 
     public TableColumn<Produto, String> nomeColumn;
 
     @FXML
+    public TableColumn<Produto, String> codigoColumn;
+
+    @FXML
     public TableColumn<Produto, String> localizacaoColumn;
 
     @FXML
     private Button cadastrarButton;
+
+    @FXML
+    private TextField codigoTextField;
 
     @FXML
     private TextField localizacaoTextField;
@@ -59,6 +65,7 @@ public class ProdutosController extends MenuController implements Initializable 
             e.printStackTrace();
         }
 
+        codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         localizacaoColumn.setCellValueFactory(new PropertyValueFactory<>("localizacao"));
 
@@ -69,6 +76,7 @@ public class ProdutosController extends MenuController implements Initializable 
     public void handleCadastro(ActionEvent event) {
         String nome = nomeTextField.getText();
         String localizacao = localizacaoTextField.getText();
+        String codigo = codigoTextField.getText();
 
         if (nome.isEmpty() || localizacao.isEmpty()) {
             System.out.println("Preencha todos os campos.");
@@ -84,7 +92,7 @@ public class ProdutosController extends MenuController implements Initializable 
         Empresa empresa = funcionarioLogado.getEmpresa();
 
         try {
-            Produto newProduto = produtoController.cradastrar(nome, localizacao, empresa);
+            Produto newProduto = produtoController.cradastrar(nome, codigo, localizacao, empresa);
             System.out.println("Produto cadastrado com sucesso: " + newProduto.getNome());
 
             loadProdutos();

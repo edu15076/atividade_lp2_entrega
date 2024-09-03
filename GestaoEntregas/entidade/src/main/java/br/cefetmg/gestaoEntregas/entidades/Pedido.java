@@ -22,16 +22,20 @@ public class Pedido {
     private Status status;
     private String observacoes;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEntregador")
     private Entregador entregador;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pedido")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<ItemPedido> itensPedido;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="idEmpresa")
+    private Empresa empresa;
 
     public Pedido() {
         valorTotal = (double) 0;
@@ -63,6 +67,14 @@ public class Pedido {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public void setStatus(Status status) {

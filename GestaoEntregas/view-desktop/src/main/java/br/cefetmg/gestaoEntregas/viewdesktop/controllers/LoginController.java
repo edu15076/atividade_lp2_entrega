@@ -55,6 +55,8 @@ public class LoginController {
 
             funcionario = funcionarioController.consultarTelefone(phoneNumberText);
 
+            System.out.println(empresa.getNome());
+
             if (funcionario == null)
                 throw new DAOException("Funcionário não encontrado com o telefone fornecido.");
 

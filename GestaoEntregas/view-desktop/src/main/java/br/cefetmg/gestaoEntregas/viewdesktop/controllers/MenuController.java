@@ -24,12 +24,16 @@ public class MenuController implements MenuControllerInterface, Initializable {
     private MenuItem pedidosMenuItem;
 
     @FXML
+    private MenuItem produtosMenuItem;
+
+    @FXML
     private MenuItem clientesMenuItem;
 
     @FXML
     private MenuItem perfilMenuItem;
 
-    // TODO: Adicionar telas de produtos, relatorios e pedidos do entregador
+    // TODO: Adicionar telas de relatorios, pedidos do entregador (que permite entregador pegar pedido), tela de detalhes de pedidos (pop-up)
+
 
     private SceneManager sceneManager;
 
@@ -38,6 +42,7 @@ public class MenuController implements MenuControllerInterface, Initializable {
         sceneManager = new SceneManager(); // Initialize the SceneManager instance
         funcionariosMenuItem.setOnAction(this::handleMenuAction);
         pedidosMenuItem.setOnAction(this::handleMenuAction);
+        produtosMenuItem.setOnAction(this::handleMenuAction);
         clientesMenuItem.setOnAction(this::handleMenuAction);
         perfilMenuItem.setOnAction(this::handleMenuAction);
     }
@@ -56,6 +61,9 @@ public class MenuController implements MenuControllerInterface, Initializable {
         } else if (event.getSource() == clientesMenuItem) {
             fxmlFile = "clientes-scene.fxml";
             title = "Clientes";
+        } else if (event.getSource() == produtosMenuItem) {
+            fxmlFile = "produtos-scene.fxml";
+            title = "Produtos";
         } else if (event.getSource() == perfilMenuItem) {
             fxmlFile = "editar-perfil-scene.fxml";
             title = "Perfil";

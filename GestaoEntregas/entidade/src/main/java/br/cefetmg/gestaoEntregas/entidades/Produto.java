@@ -16,6 +16,9 @@ public class Produto {
     private String nome;
     private String localizacao;
 
+    @Column(nullable = false)
+    private String codigo;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "produto")
     private List<ItemPedido> itemPedido;
 
@@ -38,6 +41,16 @@ public class Produto {
         if(nome.isEmpty())
             throw new AtributoInvalidoException("Nome invalido.");
         this.nome = nome;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) throws AtributoInvalidoException {
+        if (codigo.isEmpty())
+            throw new AtributoInvalidoException("Codigo de produto deve ser preenchido");
+        this.codigo = codigo;
     }
 
     public String getLocalizacao() {

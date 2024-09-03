@@ -3,6 +3,7 @@ package br.cefetmg.gestaoEntregas.controllers;
 import br.cefetmg.gestaoEntregas.dao.ItemPedidoDAO;
 import br.cefetmg.gestaoEntregas.dao.PedidoDAO;
 import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
+import br.cefetmg.gestaoEntregas.dao.utils.Pair;
 import br.cefetmg.gestaoEntregas.entidades.*;
 import br.cefetmg.gestaoEntregas.entidades.enums.Status;
 import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
@@ -10,6 +11,7 @@ import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoController {
@@ -28,6 +30,9 @@ public class PedidoController {
         Date dataAtual = Date.valueOf(LocalDate.now());
         pedido.setData(dataAtual);
 
+        Empresa empresa = LoginController.getFuncionarioLogado().getEmpresa();
+        pedido.setEmpresa(empresa);
+
         return pedido;
     }
 
@@ -38,9 +43,16 @@ public class PedidoController {
         item.setQuantidade(quantidade);
         item.setValorUnitario(valorUnitario);
 
-        List<ItemPedido> listaItens = pedido.getItensPedido();
-        listaItens.add(item);
-        pedido.setItensPedido(listaItens);
+        pedido.getItensPedido().add(item);
+    }
+
+    public ItemPedido criarItemPedido(Produto produto, int quantidade, double valorUnitario) {
+        ItemPedido item = new ItemPedido();
+        item.setProduto(produto);
+        item.setQuantidade(quantidade);
+        item.setValorUnitario(valorUnitario);
+
+        return item;
     }
 
     public void removerItemPedido(Pedido pedido, ItemPedido itemPedido) throws DAOException {
@@ -67,5 +79,11 @@ public class PedidoController {
         pedido.setStatus(status);
         pedido.setEntregador(entregador);
         pedidoDAO.atualizar(pedido);
+    }
+
+    public List<Pedido> listarPedidos() throws DAOException {
+        Empresa empresa = LoginController.getFuncionarioLogado().getEmpresa();
+
+        return pedidoDAO.consultarCampo(new Pair<>("empresa", empresa));
     }
 }
