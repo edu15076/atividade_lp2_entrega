@@ -75,9 +75,20 @@ public class PedidoController {
         pedidoDAO.salvar(pedido);
     }
 
-    public void atualizarPedidoEntregue(Pedido pedido, Status status, Entregador entregador) throws DAOException {
-        pedido.setStatus(status);
+    /**
+     * Marca o pedido como saido para entrega e atribui um entregador que realizará a entrega
+     */
+    public void atualizarPedidoSaindoParaEntrega(Pedido pedido, Entregador entregador) throws DAOException {
         pedido.setEntregador(entregador);
+        pedido.setStatus(Status.SAIU_PARA_ENTREGA);
+        pedidoDAO.atualizar(pedido);
+    }
+
+    /**
+     * Marca o pedido como entregue
+     */
+    public void atualizarPedidoEntregue(Pedido pedido) throws DAOException {
+        pedido.setStatus(Status.ENTREGUE);
         pedidoDAO.atualizar(pedido);
     }
 
@@ -85,5 +96,21 @@ public class PedidoController {
         Empresa empresa = LoginController.getFuncionarioLogado().getEmpresa();
 
         return pedidoDAO.consultarCampo(new Pair<>("empresa", empresa));
+    }
+
+    public List<Pedido> listarPedidosEntregador() throws DAOException {
+        Entregador entregador;
+
+        try {
+            entregador = (Entregador) LoginController.getFuncionarioLogado().getPerfis().getFirst();
+        } catch (ClassCastException e) {
+            throw new DAOException("O usuário autenticado não é um entregador.", e);
+        }
+
+        return pedidoDAO.consultarCampo(new Pair<>("entregador", entregador));
+    }
+
+    public Pedido consultarPedidoPorId(Long id) throws DAOException {
+        return pedidoDAO.consultar(id);
     }
 }

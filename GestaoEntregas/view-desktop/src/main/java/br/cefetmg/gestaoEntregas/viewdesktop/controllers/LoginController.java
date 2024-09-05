@@ -6,6 +6,7 @@ import br.cefetmg.gestaoEntregas.dao.EmpresaDAO;
 import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
 import br.cefetmg.gestaoEntregas.entidades.Empresa;
 import br.cefetmg.gestaoEntregas.entidades.Funcionario;
+import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
 import br.cefetmg.gestaoEntregas.viewdesktop.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,9 +70,13 @@ public class LoginController {
         } catch (DAOException e) {
             e.printStackTrace();
             System.out.println("Erro de login: " + e.getMessage());
+            return;
         }
 
         SceneManager sceneManager = new SceneManager();
-        sceneManager.showScene(sceneManager.getStage(event), "funcionarios-scene.fxml", "Desenvolvimento");
+        if (funcionario.getPerfis().getFirst().getTipoPerfil() == TipoPerfil.ENTREGADOR)
+            sceneManager.showScene(sceneManager.getStage(event), "pedidos-entregador-scene.fxml", "Entregas");
+        else
+            sceneManager.showScene(sceneManager.getStage(event), "funcionarios-scene.fxml", "Editar funcionarios");
     }
 }

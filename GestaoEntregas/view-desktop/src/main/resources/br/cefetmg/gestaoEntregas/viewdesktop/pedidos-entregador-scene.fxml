@@ -13,47 +13,47 @@
 
 <AnchorPane id="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cefetmg.gestaoEntregas.viewdesktop.controllers.PedidosEntregadorController">
   <children>
-    <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <MenuButton mnemonicParsing="false" text="Menu">
-            <items>
-                <MenuItem fx:id="funcionariosMenuItem" mnemonicParsing="false" text="Funcionários" />
-                <MenuItem fx:id="pedidosMenuItem" mnemonicParsing="false" text="Pedidos" />
-                <MenuItem fx:id="clientesMenuItem" mnemonicParsing="false" text="Clientes" />
-                <MenuItem fx:id="perfilMenuItem" mnemonicParsing="false" text="Perfil" />
-            </items>
-        </MenuButton>
-      <Button fx:id="sairButton" mnemonicParsing="false" styleClass="menuButton" text="Sair" />
-    </ToolBar>
+      <ToolBar layoutY="-1.0" prefHeight="40.0" styleClass="tool-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <MenuButton mnemonicParsing="false" text="Menu">
+              <items>
+                  <MenuItem fx:id="funcionariosMenuItem" mnemonicParsing="false" text="Funcionários" />
+                  <MenuItem fx:id="pedidosMenuItem" mnemonicParsing="false" text="Pedidos" />
+                  <MenuItem fx:id="produtosMenuItem" mnemonicParsing="false" text="Produtos" />
+                  <MenuItem fx:id="clientesMenuItem" mnemonicParsing="false" text="Clientes" />
+                  <MenuItem fx:id="perfilMenuItem" mnemonicParsing="false" text="Perfil" />
+              </items>
+          </MenuButton>
+          <Button fx:id="sairButton" mnemonicParsing="false" styleClass="menuButton" text="Sair" onAction="#onHandleSairButton" />
+      </ToolBar>
       <SplitPane dividerPositions="0.24015197349939346" layoutY="41.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="278.0">
-               <children>
-                  <VBox prefHeight="558.0" prefWidth="258.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label text="Meus dados" />
-                        <Label fx:id="nomeLabel" text="Nome: " />
-                        <Label fx:id="perfilLabel" layoutX="10.0" layoutY="28.0" text="Perfil:" />
-                        <Label fx:id="telefoneLabel" text="Telefone: " />
-                        <Button fx:id="editarButton" mnemonicParsing="false" text="Editar" />
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="667.0">
-               <children>
-                  <TableView prefHeight="558.0" prefWidth="736.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn prefWidth="102.33960181474686" text="ID Entrega" />
-                      <TableColumn prefWidth="245.43392181396484" text="Endereço" />
-                        <TableColumn minWidth="0.0" prefWidth="116.8302001953125" text="Data" />
-                        <TableColumn minWidth="0.0" prefWidth="93.28302001953125" text="Comissão" />
-                        <TableColumn minWidth="0.0" prefWidth="116.8302001953125" text="Status" />
-                        <TableColumn minWidth="0.0" prefWidth="78.7923583984375" /> <!-- TODO colocar um botão para marcar como entregue -->
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-        </items>
+          <items>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="278.0">
+                  <children>
+                      <VBox prefHeight="558.0" prefWidth="258.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <children>
+                              <Label text="Meus dados" />
+                              <Label fx:id="nomeLabel" text="Nome: " />
+                              <Label fx:id="perfilLabel" layoutX="10.0" layoutY="28.0" text="Perfil:" />
+                              <Label fx:id="telefoneLabel" text="Telefone: " />
+                          </children>
+                      </VBox>
+                  </children>
+              </AnchorPane>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="667.0">
+                  <children>
+                      <TableView fx:id="pedidosTableView" prefHeight="558.0" prefWidth="736.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="codigoColumn" prefWidth="102.33960181474686" text="Codigo pedido" />
+                              <TableColumn fx:id="enderecoColumn" prefWidth="245.43392181396484" text="Endereço" />
+                              <TableColumn fx:id="dataColumn" minWidth="0.0" prefWidth="116.8302001953125" text="Data" />
+                              <TableColumn fx:id="comissaoColumn" minWidth="0.0" prefWidth="93.28302001953125" text="Comissão" />
+                              <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="116.8302001953125" text="Status" />
+                              <TableColumn fx:id="actionColumn" minWidth="0.0" prefWidth="78.7923583984375" text="Ações" />
+                          </columns>
+                      </TableView>
+                  </children>
+              </AnchorPane>
+          </items>
       </SplitPane>
   </children>
 </AnchorPane>
