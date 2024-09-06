@@ -200,8 +200,6 @@ public class PedidosEntregadorController extends MenuController implements Initi
             List<PedidoExibition> pedidoExibitions = new ArrayList<>();
             var comissao = LoginController.getFuncionarioLogado().getEmpresa().getPorcentagemComissaoEntregador();
             for (Pedido pedido : pedidos) {
-                if (pedido.getStatus() != Status.SAIU_PARA_ENTREGA)
-                    continue;
                 pedidoExibitions.add(new PedidoExibition(pedido.getId(),
                         pedido.getCliente().getEndereco(),
                         pedido.getData().toString(),
