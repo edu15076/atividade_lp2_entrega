@@ -13,12 +13,7 @@ public class RelatorioController {
         EntregadorController ec = new EntregadorController();
         relatorio.setChaves(ec.recuperarEntregadoresEmpresa(empresa));
         relatorio.setDias(dataInicio, intervalo);
-        relatorio.setColetaDado(new Relatorio.ColetaDado<Entregador, Double>() {
-            @Override
-            public Double coletarDado(Entregador entregador, LocalDate data) throws DAOException {
-                return ec.calcularComissaoDia(entregador, data);
-            }
-        });
+        relatorio.setColetaDado(ec::calcularComissaoDia);
 
         return relatorio;
     }

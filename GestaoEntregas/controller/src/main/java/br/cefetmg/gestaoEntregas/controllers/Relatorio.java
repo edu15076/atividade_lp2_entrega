@@ -66,8 +66,10 @@ public class Relatorio<Key, Data> {
     }
 
     public void setDias(LocalDate primeiroDia, int intervalo) {
+        dias = new ArrayList<>();
+
         for (int i = 0; i < intervalo; i++) {
-            dias.set(i, primeiroDia.plusDays(i));
+            dias.add(primeiroDia.plusDays(i));
         }
     }
 
@@ -80,10 +82,12 @@ public class Relatorio<Key, Data> {
     }
 
     public void buildRelatorio() throws Exception {
+        this.campos = new HashMap<>();
+
         for (Key cabecalho : this.chaves) {
-            List<Data> campos = new ArrayList<>(this.dias.size());
-            for (int i = 0; i < this.dias.size(); i++)
-                campos.set(i, this.coletaDado.coletarDado(cabecalho, dias.get(i)));
+            List<Data> campos = new ArrayList<>();
+            for (LocalDate dia : this.dias)
+                campos.add(this.coletaDado.coletarDado(cabecalho, dia));
 
             this.campos.put(cabecalho.toString(), campos);
         }

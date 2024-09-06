@@ -86,8 +86,8 @@ alter table if exists Pedido
 
 -- Inserindo as Empresas
 INSERT INTO Empresa (cnpj, cpf, nome, porcentagemComissaoEntregador) VALUES
-('12345678000100', NULL, 'Empresa A', 5.0),
-('98765432000111', NULL, 'Empresa B', 7.0);
+('12345678000100', NULL, 'Empresa A', 0.005),
+('98765432000111', NULL, 'Empresa B', 0.007);
 
 -- Inserindo Funcionários para as Empresas
 INSERT INTO Funcionario (idEmpresa, nome, senha, telefone) VALUES

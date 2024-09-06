@@ -21,8 +21,7 @@ public class EntregadorDAO extends BaseDAO<Entregador> {
         return Entregador.class;
     }
 
-    public List<Pedido> consultarPedidosDia(Entregador entity, Date dia) throws DAOException {
-        String query = "SELECT p FROM Pedido p WHERE p.entregador.id = :entregadorId AND p.data = :data";
+    private List<Pedido> consultarPedidosDiaForQuery(Entregador entity, Date dia, String query) throws DAOException {
         List<Pedido> resultados;
 
         try (EntityManager entityManager = this.entityManagerFactory.createEntityManager()) {
@@ -36,6 +35,16 @@ public class EntregadorDAO extends BaseDAO<Entregador> {
         }
 
         return resultados;
+    }
+
+    public List<Pedido> consultarPedidosDia(Entregador entity, Date dia) throws DAOException {
+        String query = "SELECT p FROM Pedido p WHERE p.entregador.id = :entregadorId AND p.data = :data";
+        return this.consultarPedidosDiaForQuery(entity, dia, query);
+    }
+
+    public List<Pedido> consultarPedidosEntreguesDia(Entregador entity, Date dia) throws DAOException {
+        String query = "SELECT p FROM Pedido p WHERE p.entregador.id = :entregadorId AND p.data = :data AND p.status = 'ENTREGUE'";
+        return this.consultarPedidosDiaForQuery(entity, dia, query);
     }
 
     public List<Entregador> consultarEntregadoresEmpresa(Empresa empresa) throws DAOException {

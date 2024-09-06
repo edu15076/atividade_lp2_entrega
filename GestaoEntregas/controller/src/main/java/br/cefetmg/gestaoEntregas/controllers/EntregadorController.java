@@ -6,6 +6,7 @@ import br.cefetmg.gestaoEntregas.entidades.Empresa;
 import br.cefetmg.gestaoEntregas.entidades.Entregador;
 import br.cefetmg.gestaoEntregas.entidades.Funcionario;
 import br.cefetmg.gestaoEntregas.entidades.Pedido;
+import br.cefetmg.gestaoEntregas.entidades.enums.Status;
 import br.cefetmg.gestaoEntregas.entidades.enums.TipoPerfil;
 import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
 
@@ -44,15 +45,14 @@ public class EntregadorController {
 
     public double calcularComissaoDia(Entregador entregador, LocalDate dia) throws DAOException {
         Empresa empresa = entregador.getFuncionario().getEmpresa();
-        List<Pedido> pedidos = dao.consultarPedidosDia(entregador, Date.valueOf(dia));
+        List<Pedido> pedidos = dao.consultarPedidosEntreguesDia(entregador, Date.valueOf(dia));
 
-        double montante = 0;
+        double montante = 0.0;
 
-        for (Pedido pedido : pedidos) {
-            montante += pedido.getValorTotal() * empresa.getPorcentagemComissaoEntregador();
-        };
+        for (Pedido pedido : pedidos)
+            montante += pedido.getValorTotal();
 
-        return montante;
+        return empresa.getPorcentagemComissaoEntregador() * montante;
     }
 
     public List<Entregador> recuperarEntregadoresEmpresa(Empresa empresa) throws DAOException {

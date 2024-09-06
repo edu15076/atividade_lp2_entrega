@@ -21,7 +21,12 @@ public abstract class BaseDAO<T> {
         try {
             this.entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
             this.nomeEntidade = this.getEntityClass().getSimpleName();
-            this.nomeTabela = this.getEntityClass().getAnnotation(jakarta.persistence.Table.class).name();
+            String nomeTabela = "";
+            try {
+                nomeTabela = this.getEntityClass().getAnnotation(jakarta.persistence.Table.class).name();
+            } catch (NullPointerException ignored) {}
+
+            this.nomeTabela = nomeTabela;
         } catch (Exception e) {
             throw new DAOException("Erro ao criar EntityManagerFactory", e);
         }

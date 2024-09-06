@@ -3,6 +3,7 @@ package br.cefetmg.gestaoEntregas.viewdesktop.controllers;
 import br.cefetmg.gestaoEntregas.controllers.LoginController;
 import br.cefetmg.gestaoEntregas.controllers.PedidoController;
 import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
+import br.cefetmg.gestaoEntregas.entidades.Empresa;
 import br.cefetmg.gestaoEntregas.entidades.Funcionario;
 import br.cefetmg.gestaoEntregas.entidades.Pedido;
 import br.cefetmg.gestaoEntregas.entidades.enums.Status;
@@ -124,7 +125,7 @@ public class PedidosEntregadorController extends MenuController implements Initi
 
     private void loadPedidos() {
         try {
-            List<Pedido> pedidos = pedidosController.listarPedidosEntregador();
+            List<Pedido> pedidos = pedidosController.listarPedidosQueSairamParaEntregaEntregador();
             ObservableList<PedidoExibition> pedidoExibitions = FXCollections.observableArrayList(PedidoExibition.createPedidosExibition(pedidos));
             pedidosTableView.setItems(pedidoExibitions);
         } catch (Exception e) {
@@ -197,13 +198,14 @@ public class PedidosEntregadorController extends MenuController implements Initi
 
         public static List<PedidoExibition> createPedidosExibition(List<Pedido> pedidos) {
             List<PedidoExibition> pedidoExibitions = new ArrayList<>();
+            var comissao = LoginController.getFuncionarioLogado().getEmpresa().getPorcentagemComissaoEntregador();
             for (Pedido pedido : pedidos) {
                 if (pedido.getStatus() != Status.SAIU_PARA_ENTREGA)
                     continue;
                 pedidoExibitions.add(new PedidoExibition(pedido.getId(),
                         pedido.getCliente().getEndereco(),
                         pedido.getData().toString(),
-                        Double.valueOf(0.005 * pedido.getValorTotal()).toString(),
+                        Double.valueOf(comissao * pedido.getValorTotal()).toString(),
                         pedido.getStatus().name()));
             }
             return pedidoExibitions;

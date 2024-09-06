@@ -74,6 +74,7 @@ public class LoginController {
         }
 
         SceneManager sceneManager = new SceneManager();
+
         if (funcionario.getPerfis().getFirst().getTipoPerfil() == TipoPerfil.ENTREGADOR)
             sceneManager.showScene(sceneManager.getStage(event), "pedidos-entregador-scene.fxml", "Entregas");
         else

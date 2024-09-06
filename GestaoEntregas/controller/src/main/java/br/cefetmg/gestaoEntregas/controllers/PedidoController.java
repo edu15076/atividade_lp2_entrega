@@ -110,6 +110,18 @@ public class PedidoController {
         return pedidoDAO.consultarCampo(new Pair<>("entregador", entregador));
     }
 
+    public List<Pedido> listarPedidosQueSairamParaEntregaEntregador() throws DAOException {
+        Entregador entregador;
+
+        try {
+            entregador = (Entregador) LoginController.getFuncionarioLogado().getPerfis().getFirst();
+        } catch (ClassCastException e) {
+            throw new DAOException("O usuário autenticado não é um entregador.", e);
+        }
+
+        return pedidoDAO.consultarPedidosQueSairamParaEntrega(entregador);
+    }
+
     public Pedido consultarPedidoPorId(Long id) throws DAOException {
         return pedidoDAO.consultar(id);
     }
