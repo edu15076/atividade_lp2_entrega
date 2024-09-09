@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import net.synedra.validatorfx.Validator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -65,6 +66,8 @@ public class ClientesController extends MenuController implements Initializable 
 
     private ClienteController clienteController;
 
+    private Validator validator;
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
@@ -74,6 +77,63 @@ public class ClientesController extends MenuController implements Initializable 
         } catch (DAOException e) {
             e.printStackTrace();
         }
+
+        validator = new Validator();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String nome = c.get("nome");
+                    if (nome == null || nome.trim().isEmpty() || nome.length() < 3) {
+                        c.error("Campo obrigatório e mínimo de 3 caracteres");
+                    }
+                })
+                .dependsOn("nome", nomeTextField.textProperty())
+                .decorates(nomeTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String telefone = c.get("telefone");
+                    if (telefone == null || telefone.trim().isEmpty()) {
+                        c.error("Campo obrigatório e formato de telefone");
+                    }
+                })
+                .dependsOn("telefone", telefoneTextField.textProperty())
+                .decorates(telefoneTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String bairro = c.get("bairro");
+                    if (bairro == null || bairro.trim().isEmpty() || bairro.length() < 3) {
+                        c.error("Campo obrigatório e mínimo de 3 caracteres");
+                    }
+                })
+                .dependsOn("bairro", bairroTextField.textProperty())
+                .decorates(bairroTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String logradouro = c.get("logradouro");
+                    if (logradouro == null || logradouro.trim().isEmpty() || logradouro.length() < 5) {
+                        c.error("Campo obrigatório e mínimo de 5 caracteres");
+                    }
+                })
+                .dependsOn("logradouro", logradouroTextField.textProperty())
+                .decorates(logradouroTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String codigo = c.get("codigo");
+                    if (codigo == null || codigo.trim().isEmpty() || (codigo.length() != 11 && codigo.length() != 14)) {
+                        c.error("Campo obrigatório e formato de código");
+                    }
+                })
+                .dependsOn("codigo", codigoTextField.textProperty())
+                .decorates(codigoTextField)
+                .immediate();
 
         codigoColumn.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -85,6 +145,8 @@ public class ClientesController extends MenuController implements Initializable 
 
     @FXML
     public void handleCadastro(ActionEvent event) {
+        if (!validator.validate()) return;
+
         String nome = nomeTextField.getText();
         String codigo = codigoTextField.getText();
         String telefone = telefoneTextField.getText();

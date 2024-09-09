@@ -66,6 +66,7 @@
                 <TableColumn id="statusColumn" fx:id="statusColumn" minWidth="71.547119140625" prefWidth="71.547119140625" styleClass="column" text="Status" />
                 <TableColumn id="dataColumn" fx:id="dataColumn" minWidth="0.0" prefWidth="92.37728881835938" styleClass="column" text="Data" />
                 <TableColumn id="precoColumn" fx:id="precoColumn" minWidth="0.0" prefWidth="93.282958984375" styleClass="column" text="Preço" />
+                <TableColumn id="detalhesColumn" fx:id="detalhesColumn" minWidth="0.0" prefWidth="93.282958984375" styleClass="column" text="Detalhes" />
               </columns>
             </TableView>
           </children>

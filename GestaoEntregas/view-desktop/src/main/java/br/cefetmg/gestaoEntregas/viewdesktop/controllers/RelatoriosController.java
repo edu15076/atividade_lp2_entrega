@@ -13,11 +13,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import net.synedra.validatorfx.Validator;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class RelatoriosController extends MenuController {
 
@@ -38,10 +41,55 @@ public class RelatoriosController extends MenuController {
 
     private final RelatorioController relatorioController = new RelatorioController();
     private Empresa empresa;  // Assuming this is set somewhere in the code
+    private Validator validator;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.initialize(url, resourceBundle);
+
+        // Validadores
+        validator = new Validator();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String periodoInicio = c.get("periodoInicio");
+                    if (periodoInicio == null || periodoInicio.trim().isEmpty()) {
+                        c.error("Campo obrigatório");
+                    } else {
+                        try {
+                            LocalDate.parse(periodoInicio, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        } catch (Exception e) {
+                            c.error("Data inválida. Deve ser no formato yyyy-MM-dd");
+                        }
+                    }
+                })
+                .dependsOn("periodoInicio", periodoInicioTextField.textProperty())
+                .decorates(periodoInicioTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String periodoFim = c.get("periodoFim");
+                    if (periodoFim == null || periodoFim.trim().isEmpty()) {
+                        c.error("Campo obrigatório");
+                    } else {
+                        try {
+                            LocalDate.parse(periodoFim, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        } catch (Exception e) {
+                            c.error("Data inválida. Deve ser no formato yyyy-MM-dd");
+                        }
+                    }
+                })
+                .dependsOn("periodoFim", periodoFimTextField.textProperty())
+                .decorates(periodoFimTextField)
+                .immediate();
+    }
 
     @FXML
     private void onHandleAplicarButton() {
         // Parse the date input fields
+
+
         empresa = LoginController.getFuncionarioLogado().getEmpresa();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dataInicio = LocalDate.parse(periodoInicioTextField.getText(), formatter);

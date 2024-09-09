@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import net.synedra.validatorfx.Validator;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.net.URL;
@@ -34,6 +35,7 @@ public class EditarPerfilController implements Initializable {
 
     private SceneManager sceneManager;
     private FuncionarioController funcionarioController;
+    private Validator validator;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,6 +45,41 @@ public class EditarPerfilController implements Initializable {
         } catch (DAOException e) {
             throw new RuntimeException(e);
         }
+
+        validator = new Validator();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String nome = c.get("nome");
+                    if (nome == null || nome.trim().isEmpty() || nome.length() < 3) {
+                        c.error("Campo obrigatório e mínimo de 3 caracteres");
+                    }
+                })
+                .dependsOn("nome", nomeTextField.textProperty())
+                .decorates(nomeTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String senha = c.get("senha");
+                    if (senha == null || senha.trim().isEmpty() || senha.length() < 6) {
+                        c.error("Campo obrigatório e mínimo de 6 caracteres");
+                    }
+                })
+                .dependsOn("senha", senhaTextField.textProperty())
+                .decorates(senhaTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String telefone = c.get("telefone");
+                    if (telefone == null || telefone.trim().isEmpty()) {
+                        c.error("Campo obrigatório e formato de telefone");
+                    }
+                })
+                .dependsOn("telefone", numeroTextField.textProperty())
+                .decorates(numeroTextField)
+                .immediate();
     }
 
     @FXML
@@ -52,6 +89,8 @@ public class EditarPerfilController implements Initializable {
 
     @FXML
     public void handleSalvar(ActionEvent event) {
+        if (!validator.validate()) return;
+
         String nome = nomeTextField.getText();
         String numero = numeroTextField.getText();
         String senha = DigestUtils.sha256Hex(senhaTextField.getText());

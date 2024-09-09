@@ -8,6 +8,7 @@ import br.cefetmg.gestaoEntregas.entidades.ItemPedido;
 import br.cefetmg.gestaoEntregas.entidades.Pedido;
 import br.cefetmg.gestaoEntregas.entidades.enums.Status;
 import br.cefetmg.gestaoEntregas.entidades.exceptions.AtributoInvalidoException;
+import br.cefetmg.gestaoEntregas.viewdesktop.SceneManager;
 import br.cefetmg.gestaoEntregas.viewdesktop.controllers.wrappers.PedidoWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import net.synedra.validatorfx.Validator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +59,9 @@ public class PedidosController extends MenuController {
     private TableColumn<PedidoWrapper, Status> statusColumn;
 
     @FXML
+    private TableColumn<PedidoWrapper, Void> detalhesColumn;
+
+    @FXML
     private TableView<PedidoWrapper> tabelaTableView;
 
     @FXML
@@ -66,6 +71,7 @@ public class PedidosController extends MenuController {
     private VBox cadastroVBox;
 
     private ArrayList<ItemPedidoComponentController> itens;
+    private Validator validator;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,6 +86,62 @@ public class PedidosController extends MenuController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
         precoColumn.setCellValueFactory(new PropertyValueFactory<>("preco"));
+
+        detalhesColumn.setCellFactory(param -> new TableCell<PedidoWrapper, Void>() {
+            private final Button detalhesButton = new Button("Detalhes");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    detalhesButton.setOnAction(event -> {
+                        PedidoWrapper pedidoWrapper = getTableView().getItems().get(getIndex());
+                        SceneManager sceneManager = new SceneManager();
+                        try {
+                            PedidoDetalheController controller = (PedidoDetalheController) sceneManager.openNewWindow("pedido-detalhe-scene.fxml", "Pedido Detalhes");
+                            controller.loadPedido(pedidoWrapper);
+                        } catch (IOException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    });
+                    setGraphic(detalhesButton);
+                }
+            }
+        });
+
+        // Validadores
+        validator = new Validator();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String codigoCliente = c.get("codigoCliente");
+                    if (codigoCliente == null || codigoCliente.trim().isEmpty()) {
+                        c.error("Campo obrigatório");
+                    }
+                })
+                .dependsOn("codigoCliente", codigoClienteTextField.textProperty())
+                .decorates(codigoClienteTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String codigoCliente = c.get("codigoCliente");
+                    try {
+                        ClienteController controllerCliente = new ClienteController();
+                        Cliente cliente = controllerCliente.consultarCodigo(codigoCliente);
+                        if (cliente == null) {
+                            c.error("Cliente não encontrado");
+                        }
+                    } catch (DAOException e) {
+                        c.error("Erro ao verificar cliente");
+                    }
+                })
+                .dependsOn("codigoCliente", codigoClienteTextField.textProperty())
+                .decorates(codigoClienteTextField)
+                .immediate();
 
         loadPedidos();
     }
@@ -98,11 +160,13 @@ public class PedidosController extends MenuController {
             tabelaTableView.setItems(pedidoList);
 
         } catch (DAOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
     private void handleCadastrarButtonClick(ActionEvent event) {
+        if (!validator.validate()) return;
+
         String codigoCliente = codigoClienteTextField.getText();
         String observacoes = observacoesTextArea.getText();
 
@@ -116,9 +180,13 @@ public class PedidosController extends MenuController {
             Pedido pedido = controller.abrirPedido(cliente);
 
             List<ItemPedido> itensPedidos = new ArrayList<ItemPedido>();
-            for(ItemPedidoComponentController itemPedidoController : itens)
-                itensPedidos.add(itemPedidoController.getItemPedido());
+            for(ItemPedidoComponentController itemPedidoController : itens) {
+                ItemPedido item = itemPedidoController.getItemPedido();
+                item.setPedido(pedido);
+                itensPedidos.add(item);
+            }
 
+            System.out.println(itensPedidos.size());
             pedido.setItensPedido(itensPedidos);
             pedido.setObservacoes(observacoes);
 
@@ -127,7 +195,7 @@ public class PedidosController extends MenuController {
             loadPedidos();
 
         } catch (DAOException | AtributoInvalidoException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 

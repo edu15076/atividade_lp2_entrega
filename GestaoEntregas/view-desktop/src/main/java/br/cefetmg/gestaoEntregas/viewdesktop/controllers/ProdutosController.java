@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 // TODO resolver problema de dependencias
 import br.cefetmg.gestaoEntregas.entidades.Produto;
 import javafx.scene.control.cell.PropertyValueFactory;
+import net.synedra.validatorfx.Validator;
 
 public class ProdutosController extends MenuController implements Initializable {
     @FXML
@@ -54,6 +55,7 @@ public class ProdutosController extends MenuController implements Initializable 
     private TableView<Produto> tabelaTableView;
 
     private ProdutoController produtoController;
+    private Validator validator;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,11 +71,49 @@ public class ProdutosController extends MenuController implements Initializable 
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         localizacaoColumn.setCellValueFactory(new PropertyValueFactory<>("localizacao"));
 
+        // Validadores
+        validator = new Validator();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String nome = c.get("nome");
+                    if (nome == null || nome.trim().isEmpty()) {
+                        c.error("Campo obrigatório");
+                    }
+                })
+                .dependsOn("nome", nomeTextField.textProperty())
+                .decorates(nomeTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String codigo = c.get("codigo");
+                    if (codigo == null || codigo.trim().isEmpty()) {
+                        c.error("Campo obrigatório");
+                    }
+                })
+                .dependsOn("codigo", codigoTextField.textProperty())
+                .decorates(codigoTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String localizacao = c.get("localizacao");
+                    if (localizacao == null || localizacao.trim().isEmpty()) {
+                        c.error("Campo obrigatório");
+                    }
+                })
+                .dependsOn("localizacao", localizacaoTextField.textProperty())
+                .decorates(localizacaoTextField)
+                .immediate();
+
         loadProdutos();
     }
 
     @FXML
     public void handleCadastro(ActionEvent event) {
+        if (!validator.validate()) return;
+
         String nome = nomeTextField.getText();
         String localizacao = localizacaoTextField.getText();
         String codigo = codigoTextField.getText();

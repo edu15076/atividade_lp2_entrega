@@ -1,10 +1,7 @@
 package br.cefetmg.gestaoEntregas.dao;
 
 import br.cefetmg.gestaoEntregas.dao.exceptions.DAOException;
-import br.cefetmg.gestaoEntregas.entidades.Empresa;
-import br.cefetmg.gestaoEntregas.entidades.Entregador;
-import br.cefetmg.gestaoEntregas.entidades.Pedido;
-import br.cefetmg.gestaoEntregas.entidades.Produto;
+import br.cefetmg.gestaoEntregas.entidades.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -61,5 +58,21 @@ public class EntregadorDAO extends BaseDAO<Entregador> {
         }
 
         return resultados;
+    }
+
+    public Entregador consultarEntregador(String telefone) throws DAOException {
+        String query = "SELECT ent FROM Entregador ent WHERE ent.funcionario.telefone = :telefone";
+        Entregador retorno;
+
+        try (EntityManager entityManager = this.entityManagerFactory.createEntityManager()) {
+            Query queryEntity = entityManager.createQuery(query);
+            queryEntity.setParameter("telefone", telefone);
+
+            retorno = (Entregador) queryEntity.getResultList().getFirst();
+        } catch (Exception e) {
+            throw new DAOException("Erro ao consultar " + nomeEntidade, e);
+        }
+
+        return retorno;
     }
 }

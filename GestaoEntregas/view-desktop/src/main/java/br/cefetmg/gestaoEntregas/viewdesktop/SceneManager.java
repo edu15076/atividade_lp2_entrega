@@ -3,6 +3,7 @@ package br.cefetmg.gestaoEntregas.viewdesktop;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
@@ -33,6 +34,26 @@ public class SceneManager {
         stage.setTitle(sceneTitle);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public FXMLLoader getSceneLoader(String sceneName) throws IOException {
+        assert sceneName != null;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
+        fxmlLoader.load();
+        return fxmlLoader;
+    }
+
+    public Object openNewWindow(String sceneName, String sceneTitle) throws IOException {
+        FXMLLoader fxmlLoader = getSceneLoader(sceneName);
+        Parent root = fxmlLoader.getRoot();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle(sceneTitle);
+        stage.setScene(scene);
+        stage.show();
+
+        Object controller = fxmlLoader.getController();
+        return controller;
     }
 
     public Stage getStage(ActionEvent event) {

@@ -58,4 +58,8 @@ public class EntregadorController {
     public List<Entregador> recuperarEntregadoresEmpresa(Empresa empresa) throws DAOException {
         return dao.consultarEntregadoresEmpresa(empresa);
     }
+
+    public Entregador recuperarPorFuncionarioTelefone(String telefone) throws DAOException {
+        return dao.consultarEntregador(telefone);
+    }
 }

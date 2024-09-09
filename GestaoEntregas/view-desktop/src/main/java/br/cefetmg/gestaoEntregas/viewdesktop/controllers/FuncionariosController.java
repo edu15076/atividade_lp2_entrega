@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import javafx.scene.control.TextField;
+import net.synedra.validatorfx.Validator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,6 +64,7 @@ public class FuncionariosController extends MenuController {
 
     private FuncionarioController funcionarioController;
     private PerfilController perfilController;
+    private Validator validator;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,6 +80,52 @@ public class FuncionariosController extends MenuController {
             e.printStackTrace();
         }
 
+        validator = new Validator();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String nome = c.get("nome");
+                    if (nome == null || nome.trim().isEmpty() || nome.length() < 3) {
+                        c.error("Campo obrigatório e mínimo de 3 caracteres");
+                    }
+                })
+                .dependsOn("nome", nomeTextField.textProperty())
+                .decorates(nomeTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String senha = c.get("senha");
+                    if (senha == null || senha.trim().isEmpty() || senha.length() < 6) {
+                        c.error("Campo obrigatório e mínimo de 6 caracteres");
+                    }
+                })
+                .dependsOn("senha", senhaPasswordField.textProperty())
+                .decorates(senhaPasswordField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String telefone = c.get("telefone");
+                    if (telefone == null || telefone.trim().length() != 9) {
+                        c.error("Campo obrigatório e formato de telefone");
+                    }
+                })
+                .dependsOn("telefone", telefoneTextField.textProperty())
+                .decorates(telefoneTextField)
+                .immediate();
+
+        validator.createCheck()
+                .withMethod(c -> {
+                    String perfil = c.get("perfil");
+                    if (perfil == null) {
+                        c.error("Campo obrigatório");
+                    }
+                })
+                .dependsOn("perfil", perfilComboBox.valueProperty())
+                .decorates(perfilComboBox)
+                .immediate();
+
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         perfilColumn.setCellValueFactory(new PropertyValueFactory<>("perfil"));
         telefoneColumn.setCellValueFactory(new PropertyValueFactory<>("telefone"));
@@ -86,6 +134,8 @@ public class FuncionariosController extends MenuController {
     }
 
     private void handleCadastrarButtonClick() {
+        if (!validator.validate()) return;
+
         String nome = nomeTextField.getText();
         String senha = senhaPasswordField.getText();
         String telefone = telefoneTextField.getText();

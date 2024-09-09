@@ -125,7 +125,7 @@ public class PedidosEntregadorController extends MenuController implements Initi
 
     private void loadPedidos() {
         try {
-            List<Pedido> pedidos = pedidosController.listarPedidosQueSairamParaEntregaEntregador();
+            List<Pedido> pedidos = pedidosController.listarPedidosEntregador();
             ObservableList<PedidoExibition> pedidoExibitions = FXCollections.observableArrayList(PedidoExibition.createPedidosExibition(pedidos));
             pedidosTableView.setItems(pedidoExibitions);
         } catch (Exception e) {
