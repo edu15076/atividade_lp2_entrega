@@ -95,8 +95,6 @@ public class ItemPedidoComponentController implements Initializable {
 
     @FXML
     public void handleRemoverButtonClick(ActionEvent event) {
-        if (!validator.validate()) return;
-
         if (pedidosController != null) {
             pedidosController.removerItemPedido(produtoVBox, this);
         } else {
